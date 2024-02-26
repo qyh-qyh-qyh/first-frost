@@ -1,0 +1,73 @@
+/*这个在哪都有*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  width: 1463px;
+  height: 963px;
+  display: flex;
+  background: #111;
+  perspective: 1000px; /*光看CSS看不出作用*/
+  -webkit-perspective: 2000px;
+  transform-style: preserve-3d; /*光看CSS也看不出作用*/
+}
+
+#drag-container,
+#spin-container {
+  width: 100%;
+  height: 100%; /*solution1：解决了高度的问题,此时照片能装入了*/
+  margin: auto;
+  position: relative;
+  display: flex;
+  transform-style: preserve-3d;
+  transform: rotateX(-10deg); /*这个似乎还会改变大小来到的*/
+}
+
+#spin-container img {
+  width: 40%;
+  height: 40%;
+  /*font-size: 50px;
+  text-align: center;*/
+  position: absolute; /*1.为什么设置成这样一下子就什么都看不见了（原因是容器没有高度）*/ /*2.证明正常的就是会黑但是不知道为什么*/
+  /*3.因为absolute所以形成相互遮挡的样子*/
+  top: 40%;
+  left: 40%;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 8px #fff;
+}
+
+#spin-container img:hover {
+  box-shadow: 0 0 10px #fffd;
+}
+
+#ground {
+  width: 900px;
+  height: 900px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(90deg);
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes spinRevert {
+  from {
+    transform: rotateY(360deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
+  }
+}
